@@ -3,6 +3,7 @@ plugins {
     kotlin("jvm") version kotlinVersion
     kotlin("plugin.serialization") version kotlinVersion
 
+    id("com.github.gmazzo.buildconfig") version "3.1.0"
     id("net.mamoe.mirai-console") version "2.16.0"
 }
 
@@ -14,6 +15,14 @@ repositories {
         maven("https://maven.aliyun.com/repository/public") // 阿里云国内代理仓库
     }
     mavenCentral()
+}
+
+buildConfig {
+    className("BuildConstants")
+    packageName("org.example.mirai.plugin")
+    useKotlinOutput()
+
+    buildConfigField("String", "VERSION", "\"${project.version}\"")
 }
 
 mirai {
